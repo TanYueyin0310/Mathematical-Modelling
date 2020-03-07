@@ -1,0 +1,8 @@
+function [y] = m2(x)
+n = length(x);
+dt = 0.01*;
+for t = zeros(n,1):0.01*ones(n,1):sin(x)
+dy = ((1 - t.^2).^1.5).*dt;
+end
+y =sum(dy);
+end
