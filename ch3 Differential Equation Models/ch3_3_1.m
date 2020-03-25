@@ -13,4 +13,5 @@ yfit = n0 * exp( r * (xdata - 1982));
 plot(xdata, ydata, '*b', xdata, yfit, '-r');
 xlabel('Year');
 ylabel('Population/10^8');
+err = norm((yfit-ydata)/ydata,2)
 
