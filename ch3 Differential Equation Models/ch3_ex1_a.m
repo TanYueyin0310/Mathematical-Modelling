@@ -36,4 +36,4 @@ plot( xdata_pred, yfit_malthus_pred, '-','color',[0.4,0.5,0.6],'linewidth',1.5);
 plot(xdata_pred,yfit_logistic_pred,'-','color',[0.8,0.6,0.1],'linewidth',1.5);
 xlabel('Year');
 ylabel('Industrial Production/10^8');
-legend({'Data from 1980 to 2010','Malthus Model Curve'£¬'Logistic Model Curve','location'},'location','northwest');
+legend({'Data from 1980 to 2010','Malthus Model Curve','Logistic Model Curve','location'},'location','northwest');
