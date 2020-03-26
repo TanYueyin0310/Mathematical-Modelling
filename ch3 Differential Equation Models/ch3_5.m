@@ -12,13 +12,13 @@ n = length(x0); nv = length(xv);
 sigma = x0(1:n-1)./x0(2:n);%计算级比
 Range = minmax(sigma);%以矩阵形式输出sigma中的最小值和最大值
 x1 = cumsum(x0); %x0_p经过1-AGO得到的x1_p
-alpha = 0.5; %发展系数 
+alpha = 0.5; %生成系数 
 for i = 2 : n %由x1_p计算紧邻均值生成数列z(1)
     z(i) = alpha * (x1(i) + x1(i-1));
 end
 B = [-z(2:n)',ones(n-1,1)]; % 灰方程x0(k) + a * z1(k) = b → Y = B * u （其中u = [a b]')
 Y = x0(2:n)';
-u = B\Y; a = u(1); b = u(2);%求出a,b的最小二乘值
+u = B\Y; a = u(1); b = u(2);%求出a,b的最小二乘值，a为发展系数，b为灰作用量
 %% 通过灰色预测模型计算x0的还原值（用于检验模型）
 xv_p = zeros(1,n);
 xv_p(1) = x0(1);
