@@ -15,11 +15,12 @@ w = [inf 45  60  inf inf inf inf
      temp = w(U,V);
      temp = temp(:);%a(:)表示将a的所有元素列成一列
      d_min = min(temp);
-     [j,k] = find(w(U,V) == d_min);%找U集合到V集合的最小权，并记录其路径（由其坐标即可在U，V集合中确定路径两端点）
-     Path_j = U(j(1));%存储找到的这条路径终点(在U集合中）
-     Path_k = V(k(1));%存储找到的这条路径终点(在V集合中）
+     [j,k] = find(w(U,V) == d_min);%找U集合到V集合的最小权（最短的一步路径），并记录其起点终点两点坐标（由其坐标即可在U，V集合中确定路径两端点）
+     Path_j = U(j(1));%存储找到的这条路径终点坐标(在U集合中）
+     Path_k = V(k(1));%存储找到的这条路径起点坐标(在V集合中）
      result = [result,[Path_j;Path_k;d_min]];%将这一条路径储存到之前路径集合之中
      U = [U,Path_k];%将已找到满足“U到V权为当时V中点最小”的点加入U
      V(k(1)) = [];%并从V中去掉
  end
  disp(result);
+ pdist();
