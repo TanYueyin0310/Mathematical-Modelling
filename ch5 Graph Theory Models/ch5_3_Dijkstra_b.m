@@ -10,8 +10,8 @@ W = [ 0  inf  5  30  inf inf
  n = length(W);
  S(1:n) = 0;%当S向量中某个元素为1时，说明他在S集合中
  S(1) = 1;%以顺序第1的点为起点
- destination = 1;
- index2 = ones(1,n);
+ sequence_of_vertex_involved_in_S = 1;
+ destination = ones(1,n);
  d(1:n) = inf; d(1) = 0; temp = 1;
  while sum(S) < n
      S_bar = find(S==0);%找到所有还未在S集中的点（以坐标形式）
@@ -19,11 +19,11 @@ W = [ 0  inf  5  30  inf inf
      temp_shortest = find(d(S_bar) == min(d(S_bar)));
      temp = S_bar(temp_shortest(1));%将这一次尝试中第一个最短路径的点temp_shortest（若有相同）找出来，则条路径就是起点到temp_shortest点的最短路径，并且下一次从这个点开始找起点到其他点的最短路径
      S(temp) = 1;%将这个点放进S中
-     destination = [destination,temp];%记录找到起到到某个点最短路径的顺序
-     index = destination(find(d(destination) == d(temp) - W(temp,destination)));
+     sequence_of_vertex_involved_in_S = [sequence_of_vertex_involved_in_S,temp];%记录找到起到到某个点最短路径的顺序
+     index = sequence_of_vertex_involved_in_S(find(d(sequence_of_vertex_involved_in_S) == d(temp) - W(temp,sequence_of_vertex_involved_in_S)));
      if length(index) >= 2
          index = index(1);
      end
-     index2(temp) = index;%老师说是迭代顺序，anyway idk
+     destination(temp) = index;%老师说是迭代顺序，纳入集合S的顺序
  end
- d, destination, index2
+ d, sequence_of_vertex_involved_in_S, destination

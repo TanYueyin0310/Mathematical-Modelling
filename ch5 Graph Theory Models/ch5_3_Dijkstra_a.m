@@ -7,7 +7,7 @@ W = [ 0  inf  5  30  inf inf
      inf inf inf  0  inf inf
      inf inf inf  5   0  inf
      inf inf inf  10  18  0];
- [S,D] = ch5_3_Dijkstra_sub(1,6,W)%输出的是1到所有其他节点的最短路径
+ [ShortestPath,distance] = ch5_3_Dijkstra_sub(1,6,W)%输出的是1到所有其他节点的最短路径
  
  
  

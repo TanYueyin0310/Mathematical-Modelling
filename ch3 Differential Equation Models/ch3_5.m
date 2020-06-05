@@ -3,11 +3,12 @@
 %人口预测模型--GM(1,1)灰色预测模型
 %% 输入数据
 x0 = [11.4333 11.5823 11.7171 11.8517 11.9850 12.1121 12.2389 12.3626...
-      12.4761 12.5786 12.6743 12.7627 12.8453 12.9227 12.9988 13.0756 ];
+      12.4761 12.5786 12.6743 12.7627 12.8453 12.9227 12.9988 13.0756 ];%用于预测的数据
 xv = [11.4333 11.5823 11.7171 11.8517 11.9850 12.1121 12.2389 12.3626...
       12.4761 12.5786 12.6743 12.7627 12.8453 12.9227 12.9988 13.0756... 
-      13.1448 13.2129 13.2802 13.3450 13.4091 ];
-n = length(x0); nv = length(xv);
+      13.1448 13.2129 13.2802 13.3450 13.4091 ];%用于检验的数据（真实数据）
+n = length(x0); 
+nv = length(xv);
 %% 计算模型所需参数
 sigma = x0(1:n-1)./x0(2:n);%计算级比
 Range = minmax(sigma);%以矩阵形式输出sigma中的最小值和最大值
@@ -35,13 +36,13 @@ figure(1);%绝对残差与相对残差可视化
 subplot(2,1,1);plot(t,residual_a);legend("Absolute Residuals");xlabel("Year");ylabel("Population/10^8");
 subplot(2,1,2);plot(t,residual_r);legend("Relative Residuals");xlabel("Year");ylabel("Percentage");
 figure(2);%x0还原值 vs x0
-plot(t,x0,'r.',t,xv_p,'bo');legend("Date","Prediction");xlabel("Year");ylabel("Population/10^8");title("Prediction from 1990 to 2005 via GM(1,1)");
+plot(t,x0,'r.',t,xv_p,'bo');legend("Date","Prediction");xlabel("Year");ylabel("Population/10^8");title("Prediction vs Real Data from 1990 to 2005 via GM(1,1)");
 %% 同归灰色预测模型预测后面几年的数据
-xv_p = zeros(1,nv);
-xv_p(1) = x0(1);
+x_p = zeros(1,nv);
+x_p(1) = x0(1);
 for k = 1 : nv - 1
-    xv_p(k+1) = (1 - exp(a)) * (x0(1) - b/a) * exp(-a * k);
+    x_p(k+1) = (1 - exp(a)) * (x0(1) - b/a) * exp(-a * k);
 end
 figure(3);
 t1 = 1990 : (1989 + nv);
-plot(t1,xv,'r.',t1,xv_p,'bo');legend("Data","Prediction");xlabel("Year");ylabel("Population/10^8");title("Prediction from 1990 to 2010 via GM(1,1)");
+plot(t1,xv,'r.',t1,x_p,'bo');legend("Data","Prediction");xlabel("Year");ylabel("Population/10^8");title("Prediction vs Real Data from 1990 to 2010 via GM(1,1)");
